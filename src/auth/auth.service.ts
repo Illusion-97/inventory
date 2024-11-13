@@ -1,19 +1,36 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of, tap} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  private currentResponse: BehaviorSubject<AuthResponse | undefined> = new BehaviorSubject<AuthResponse | undefined>(undefined)
+  get isLogged() {
+    return !!this.currentResponse.value
+  }
+  get currentUser() {
+    return this.currentResponse.value?.user
+  }
+  get token() {
+    return this.currentResponse.value?.accessToken
+  }
+
+  constructor(private http : HttpClient) { }
 
   login(credentials: Credentials): Observable<AuthResponse> {
-    return of({})
+    return this.http.post<AuthResponse>('http://localhost:3000/login', credentials)
+      .pipe(tap(response => this.currentResponse.next(response)))
   }
 
   register(user: User): Observable<AuthResponse> {
-    return of({})
+    return this.http.post<AuthResponse>('http://localhost:3000/register', user)
+  }
+
+  logout() {
+    this.currentResponse.next(undefined)
   }
 }
 
@@ -28,5 +45,6 @@ export interface User extends Credentials {
 }
 
 export interface AuthResponse {
-
+  accessToken: string,
+  user: User
 }
