@@ -45,7 +45,7 @@ export abstract class AbstractFormComponent {
 
   errorMessages(control: string | AbstractControl) {
     control = this.getControl(control)
-    return control.errors
+    return control.errors && this.isInvalid(control)
       ? Object.entries(control.errors).map(error => this.VALIDATORS_TIPS.get(error[0])?.(error[1]))
         .filter(s => !!s)
       : []
