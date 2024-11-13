@@ -37,4 +37,18 @@ export abstract class AbstractFormComponent {
   }
 
   abstract onSubmit$(): void
+
+  VALIDATORS_TIPS : Map<string, (value: any) => string> = new Map<string,  (value: any) => string>([
+    ['required', () => 'Le champ est requis'],
+    ['minlength', value => `Too short, required : ${value.requiredLength}; actual : ${value.actualLength}`]
+  ])
+
+  errorMessages(control: string | AbstractControl) {
+    control = this.getControl(control)
+    return control.errors
+      ? Object.entries(control.errors).map(error => this.VALIDATORS_TIPS.get(error[0])?.(error[1]))
+        .filter(s => !!s)
+      : []
+  }
+
 }

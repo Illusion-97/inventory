@@ -3,12 +3,14 @@ import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators
 import {AuthService} from '../../auth.service';
 import {Router} from '@angular/router';
 import {AbstractFormComponent} from '../../../common/components/abstract-form-component';
+import {JsonPipe} from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JsonPipe
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
@@ -30,4 +32,7 @@ export class RegisterComponent extends AbstractFormComponent {
     this.service.register(this.form.value).subscribe(() => this.router.navigate(['/login']))
   }
 
+  getEntries(value: any) {
+    return Object.entries(value)
+  }
 }
