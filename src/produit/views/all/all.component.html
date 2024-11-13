@@ -1,7 +1,11 @@
 <div>
   @for (produit of produits | async; track $index) {
-    <p>Produit : {{produit}}</p>
+    <div>
+      <p>Nom : {{produit.name}}</p>
+      <a [routerLink]="''+produit.id">Editer</a>
+    </div>
   } @empty {
     <p>Liste Vide</p>
   }
 </div>
+<a routerLink="0">Nouveau Produit</a>
