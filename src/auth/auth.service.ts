@@ -21,12 +21,12 @@ export class AuthService {
   constructor(private http : HttpClient) { }
 
   login(credentials: Credentials): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>('http://localhost:3000/login', credentials)
+    return this.http.post<AuthResponse>('/login', credentials)
       .pipe(tap(response => this.currentResponse.next(response)))
   }
 
   register(user: User): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>('http://localhost:3000/register', user)
+    return this.http.post<AuthResponse>('/register', user)
   }
 
   logout() {
