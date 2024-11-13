@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of, tap} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {CanMatchFn, Router, UrlTree} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -47,4 +48,8 @@ export interface User extends Credentials {
 export interface AuthResponse {
   accessToken: string,
   user: User
+}
+
+export const authGuard: CanMatchFn = () => {
+  return inject(AuthService).isLogged || inject(Router).createUrlTree(['/login']) /*new UrlTree() --> redirige vers '/'*/
 }

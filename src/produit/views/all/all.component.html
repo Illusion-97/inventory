@@ -1,1 +1,7 @@
-<p>all works!</p>
+<div>
+  @for (produit of produits | async; track $index) {
+    <p>Produit : {{produit}}</p>
+  } @empty {
+    <p>Liste Vide</p>
+  }
+</div>

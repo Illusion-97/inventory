@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import {authGuard} from '../auth/auth.service';
 
 export const routes: Routes = [
   {
@@ -29,7 +30,8 @@ export const routes: Routes = [
   {
     path: "produits",
     loadChildren: () => import('../produit/produit.routes')
-      .then(m => m.routes)
+      .then(m => m.routes),
+    canMatch: [authGuard]
   },
   {
     path: "**", // URL wildcards,
