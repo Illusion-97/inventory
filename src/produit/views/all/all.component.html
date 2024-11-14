@@ -1,5 +1,5 @@
 @if (produits | async; as products) {
-  <app-table [datas]="products">
+  <app-table [datas]="products" (delete)="delete($event)">
     <ng-template #head>
       <th scope="col" class="px-6 py-3">
         Nom

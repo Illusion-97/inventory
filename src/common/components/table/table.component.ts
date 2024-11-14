@@ -1,4 +1,4 @@
-import {Component, ContentChild, Input, TemplateRef} from '@angular/core';
+import {Component, ContentChild, EventEmitter, Input, Output, TemplateRef} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {NgTemplateOutlet} from '@angular/common';
 
@@ -14,7 +14,7 @@ import {NgTemplateOutlet} from '@angular/common';
 })
 export class TableComponent {
   @Input({required: true}) datas!: any[]
-
+  @Output() delete: EventEmitter<number> = new EventEmitter<number>()
   @ContentChild('head') headRef?: TemplateRef<any>
   @ContentChild('body') bodyRef?: TemplateRef<any>
 }
