@@ -20,7 +20,7 @@ export class AuthService {
     return this.currentResponse.value?.accessToken
   }
 
-  constructor(private http : HttpClient) {
+  constructor(private http : HttpClient, router: Router) {
     const authResponse = sessionStorage.getItem(this.AUTH_KEY)
     if(authResponse) this.currentResponse.next(JSON.parse(authResponse))
     this.currentResponse.subscribe(authResponse => {
@@ -28,6 +28,7 @@ export class AuthService {
         sessionStorage.setItem(this.AUTH_KEY,JSON.stringify(authResponse))
       } else {
         sessionStorage.clear()
+        router.navigate(['/'])
       }
     })
   }

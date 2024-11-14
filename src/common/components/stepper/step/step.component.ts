@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectorRef, Component, inject} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
@@ -9,8 +9,9 @@ import {BehaviorSubject} from 'rxjs';
   styleUrl: './step.component.css'
 })
 export class StepComponent {
-  index : number = 1
+  index : number = 0
   currentIndex: BehaviorSubject<number> = new BehaviorSubject<number>(0)
+  cd = inject(ChangeDetectorRef)
   get left() {
     return (this.index - this.currentIndex.value) * 100
   }

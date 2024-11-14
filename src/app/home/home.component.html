@@ -1,13 +1,11 @@
-<div class="h-full w-full p-5 flex justify-center items-center">
+<div class="h-full">
   <app-stepper>
-    <app-step>
-      Hello from the home side 1
-    </app-step>
-    <app-step>
-      Hello from the home side 2
-    </app-step>
-    <app-step>
-      Hello from the home side 3
-    </app-step>
+    @for(produit of produits | async; track produit.id) {
+      <app-step>
+        <div class="h-full w-full p-5 flex justify-center items-center">
+          <app-detail [produit]="produit"/>
+        </div>
+      </app-step>
+    }
   </app-stepper>
 </div>
