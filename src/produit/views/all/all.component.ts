@@ -21,6 +21,16 @@ export class AllComponent {
   produits : Observable<Produit[]> = inject(ActivatedRoute).data.pipe(map(({produits}) => produits ))
 
   delete(id: number) {
+
+    /*this.http.delete("/products/"+id)
+      .subscribe(() => this.produits =  this.http.get<Produit[]>('/products'))
+    // Cette syntaxe implique 2 'subscribe' un pour le delete et l'autre pour produit (dans l'html via | async)
+    // Pour éviter d'avoir 2 souscriptions pour effectuer un delete, on va affecter à l'observable 'produits' une valeur obtenue
+    // apres le retour de l'observable généré par http.delete.
+    // Il ne s'agit pas de transformer la réponse obtenue par le delete, mais passer à un autre observable
+    // qui lui est obtenu par http.get*/
+
+
     this.produits = this.http.delete("/products/"+id)
       .pipe(switchMap(() => this.http.get<Produit[]>('/products')))
   }
