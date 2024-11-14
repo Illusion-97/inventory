@@ -1,0 +1,26 @@
+@if (sites | async; as datas) {
+  <app-table [datas]="datas" (delete)="delete($event)">
+    <ng-template #head>
+      <th scope="col" class="px-6 py-3">
+        Nom
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Adresse
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Nb. Produits
+      </th>
+    </ng-template>
+    <ng-template let-elem="data" #body>
+      <td class="px-6 py-4">
+        {{elem.name}}
+      </td>
+      <td class="px-6 py-4">
+        {{elem.adresse}}
+      </td>
+      <td class="px-6 py-4">
+        {{elem.produits.length}}
+      </td>
+    </ng-template>
+  </app-table>
+}

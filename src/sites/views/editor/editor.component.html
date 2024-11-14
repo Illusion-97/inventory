@@ -1,0 +1,67 @@
+<div class="h-full flex items-center justify-center">
+  <form class="h-full flex flex-col w-1/3 border p-5 rounded-2xl shadow-2xl dark:shadow-gray-600 bg-white dark:bg-gray-900"
+        [formGroup]="form" (submit)="onSubmit()">
+    <div class="grow min-h-0">
+      <app-stepper>
+        <app-step>
+          <div class="mb-5 pb-5 border-b">
+            <h1 class="text-5xl text-center text-gray-900 dark:text-gray-300">Edition de Sites</h1>
+          </div>
+          <div class="mb-5">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Nom :
+              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                     type="text" name="name" formControlName="name" >
+            </label>
+          </div>
+          @for (message of errorMessages('name'); track $index) {
+            <p class="text-red-800">{{message}}</p>
+          }
+          <div class="mb-5">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Adresse :
+              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                     type="text" name="price"  formControlName="adresse">
+            </label>
+          </div>
+          @for (message of errorMessages('adresse'); track $index) {
+            <p class="text-red-800">{{message}}</p>
+          }
+        </app-step>
+        <app-step>
+          @if (produits | async; as products) {
+            <app-table [datas]="products">
+              <ng-template #head>
+                <th scope="col" class="px-6 py-3">
+                  Nom
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Prix
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  En Stock
+                </th>
+              </ng-template>
+              <ng-template let-produit="data" #body>
+                <td class="px-6 py-4">
+                  {{produit.name}}
+                </td>
+                <td class="px-6 py-4">
+                  {{produit.price}}
+                </td>
+                <td class="px-6 py-4">
+                  <input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                         type="checkbox"
+                         [checked]="checked(produit)"
+                         (change)="toggle(produit)">
+                </td>
+              </ng-template>
+            </app-table>
+          }
+        </app-step>
+      </app-stepper>
+    </div>
+   <div class="border-t mt-5 pt-5 flex justify-center">
+      <input class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit" value="Enregistrer"
+             [disabled]="form.invalid">
+    </div>
+  </form>
+</div>

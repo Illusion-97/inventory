@@ -39,6 +39,12 @@ export const routes: Routes = [
     canMatch: [authGuard]
   },
   {
+    path: "sites",
+    loadChildren: () => import('../sites/sites.routes')
+      .then(m => m.routes),
+    canMatch: [authGuard]
+  },
+  {
     path: "**", // URL wildcards,
     loadComponent: () => import('./not-found/not-found.component')
       .then(m => m.NotFoundComponent)
