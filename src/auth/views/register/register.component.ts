@@ -2,7 +2,7 @@ import {Component, inject} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from '../../auth.service';
 import {Router} from '@angular/router';
-import {AbstractFormComponent} from '../../../common/components/abstract-form-component';
+import {AbstractFormComponent} from '@adya/my-nga';
 import {JsonPipe} from '@angular/common';
 
 @Component({

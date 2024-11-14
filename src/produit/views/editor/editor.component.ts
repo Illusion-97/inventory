@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {AbstractFormComponent} from '../../../common/components/abstract-form-component';
+import {AbstractFormComponent} from '@adya/my-nga'
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, Data, Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
@@ -37,7 +37,7 @@ export class EditorComponent extends AbstractFormComponent {
   onSubmit$(): void {
     const id = this.form.value.id
     //l'ajout à l'URL entre () est propre à Json-Server
-    this.http[id ? 'put' : 'post']('/products' + (id ? '/' + id : ''), this.form.value)
-      .subscribe(() => this.router.navigate(['/produits']))
+    this.http[id ? 'put' : 'post']('/sites' + (id ? '/' + id : ''), this.form.value)
+      .subscribe(() => this.router.navigate(['/sites']))
   }
 }

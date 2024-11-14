@@ -19,7 +19,7 @@ export class StepperComponent implements AfterContentInit {
     this.steps.forEach((step, index) => {
       step.index = index
       step.currentIndex = this.currentIndex
-      step.cd.detectChanges()
+      step.cd.detectChanges() // utile uniquement en dev
     })
   }
 }

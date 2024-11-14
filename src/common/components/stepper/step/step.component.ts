@@ -9,7 +9,7 @@ import {BehaviorSubject} from 'rxjs';
   styleUrl: './step.component.css'
 })
 export class StepComponent {
-  index : number = 0
+  index : number = 1
   currentIndex: BehaviorSubject<number> = new BehaviorSubject<number>(0)
   cd = inject(ChangeDetectorRef)
   get left() {
