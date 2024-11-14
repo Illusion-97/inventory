@@ -1,11 +1,20 @@
-<div>
-  @for (produit of produits | async; track $index) {
-    <div>
-      <p>Nom : {{produit.name}}</p>
-      <a [routerLink]="''+produit.id">Editer</a>
-    </div>
-  } @empty {
-    <p>Liste Vide</p>
-  }
-</div>
-<a routerLink="0">Nouveau Produit</a>
+@if (produits | async; as products) {
+  <app-table [datas]="products">
+    <ng-template #head>
+      <th scope="col" class="px-6 py-3">
+        Nom
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Prix
+      </th>
+    </ng-template>
+    <ng-template let-produit="data" #body>
+      <td class="px-6 py-4">
+        {{produit.name}}
+      </td>
+      <td class="px-6 py-4">
+        {{produit.price}}
+      </td>
+    </ng-template>
+  </app-table>
+}
