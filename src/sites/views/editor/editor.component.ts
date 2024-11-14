@@ -42,7 +42,7 @@ export class EditorComponent extends AbstractFormComponent {
     route.data.pipe(takeUntilDestroyed()).subscribe(({site}) => {
       if(site) {
         this.form.patchValue(site)
-        site.produits.forEach(p => (this.form.get('produits') as FormArray).push(new FormControl(p)))
+        site.produits.forEach((p: Produit) => (this.form.get('produits') as FormArray).push(new FormControl(p)))
       }
       else this.form.reset({
         id: 0
