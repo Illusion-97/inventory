@@ -3,6 +3,7 @@ import {AbstractFormComponent} from '../../../common/components/abstract-form-co
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, Data, Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-editor',
@@ -26,7 +27,7 @@ export class EditorComponent extends AbstractFormComponent {
 
   constructor(route: ActivatedRoute) {
     super();
-    route.data.subscribe(({produit}) => {
+    route.data.pipe(takeUntilDestroyed()).subscribe(({produit}) => {
       if(produit) this.form.patchValue(produit)
       else this.form.reset({
         id: 0

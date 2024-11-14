@@ -1,0 +1,15 @@
+<div class="h-full w-full overflow-hidden relative">
+  <ng-content/>
+  @if (currentIndex.value > 0) {
+    <button class="h-full w-10 absolute left-0 flex flex-col justify-center opacity-0 hover:opacity-100"
+            (click)="currentIndex.next(currentIndex.value - 1)">
+      <div class="bg-black/10 p-3 rounded-full"><</div>
+    </button>
+  }
+  @if (currentIndex.value < steps.length - 1) {
+    <button class="h-full w-10 absolute right-0 flex flex-col justify-center opacity-0 hover:opacity-100"
+            (click)="currentIndex.next(currentIndex.value + 1)">
+      <div class="bg-black/10 p-3 rounded-full">></div>
+    </button>
+  }
+</div>

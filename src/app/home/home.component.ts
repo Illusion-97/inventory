@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
+import {StepperComponent} from '../../common/components/stepper/stepper.component';
+import {StepComponent} from '../../common/components/stepper/step/step.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [
+    StepperComponent,
+    StepComponent
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

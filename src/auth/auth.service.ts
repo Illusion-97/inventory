@@ -9,6 +9,7 @@ import {CanMatchFn, Router, UrlTree} from '@angular/router';
 export class AuthService {
 
   private currentResponse: BehaviorSubject<AuthResponse | undefined> = new BehaviorSubject<AuthResponse | undefined>(undefined)
+  private readonly AUTH_KEY: string = "AUTH_RESPONSE"
   get isLogged() {
     return !!this.currentResponse.value
   }
@@ -19,7 +20,17 @@ export class AuthService {
     return this.currentResponse.value?.accessToken
   }
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient) {
+    const authResponse = sessionStorage.getItem(this.AUTH_KEY)
+    if(authResponse) this.currentResponse.next(JSON.parse(authResponse))
+    this.currentResponse.subscribe(authResponse => {
+      if(authResponse) {
+        sessionStorage.setItem(this.AUTH_KEY,JSON.stringify(authResponse))
+      } else {
+        sessionStorage.clear()
+      }
+    })
+  }
 
   login(credentials: Credentials): Observable<AuthResponse> {
     return this.http.post<AuthResponse>('/login', credentials)
